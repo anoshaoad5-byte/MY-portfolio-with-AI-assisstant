@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Anosha Oad</title>
+#flak serve static folder for static router url_for
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+#Font Awesome icon library from a CDN (Content Delivery Network).
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+#It downloads the Poppins font from Google Fonts.
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo"><a href="/">ANOSHA OAD</a></div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="about">About</a></li>
+            <li><a href="projects">Projects</a></li>
+            <li><a class="active" href="contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="page-title">
+    <h1>Contact Me</h1>
+    <p>Let's discuss your ideas and create something amazing.</p>
+</section>
+
+<section class="contact-section">
+
+    <div class="contact-info">
+        <h2>Get In Touch</h2>
+        <p>I am available for internships, freelance projects, and collaboration opportunities.</p>
+
+        <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+                <h3>Email</h3>
+                <p><a href="mailto:anoshaoad5@gmail.com">anoshaoad5@gmail.com</a></p>
+            </div>
+        </div>
+
+        <div class="contact-item">
+            <i class="fab fa-github"></i>
+            <div>
+                <h3>GitHub</h3>
+                <p><a href="https://github.com/anoshaoad5-byte" target="_blank" rel="noopener">github.com/anoshaoad5-byte</a></p>
+            </div>
+        </div>
+
+        <div class="contact-item">
+            <i class="fab fa-linkedin"></i>
+            <div>
+                <h3>LinkedIn</h3>
+                <p><a href="#" target="_blank" rel="noopener">LinkedIn Profile</a></p>
+            </div>
+        </div>
+
+        <div class="contact-item">
+            <i class="fas fa-sms"></i>
+            <div>
+                <h3>SMS</h3>
+                <p><a href="sms:{{ status.phone }}">Text me directly</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="contact-form">
+        <form action="{{ url_for('contact') }}" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <input type="text" name="subject" placeholder="Subject" required>
+            <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        {% if success %}
+        <p style="color:green; margin-top:15px;">Thanks! Your message has been sent.</p>
+        {% endif %}
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 All Rights Reserved</p>
+</footer>
+
+<!-- ================= VEDHI CHAT WIDGET ================= -->
+<div class="vedhi-widget">
+
+    <button id="vedhiBubble" class="vedhi-bubble" aria-label="Open chat">
+        <i class="fas fa-comment-dots"></i>
+    </button>
+
+    <div id="vedhiPanel" class="vedhi-panel" style="display:none;">
+
+        <div class="vedhi-header">
+            <div>
+                <strong>Vedhi</strong>
+                <span class="vedhi-status-dot {{ 'online' if status.available else 'offline' }}"></span>
+            </div>
+            <button id="vedhiClose" class="vedhi-close" aria-label="Close chat">&times;</button>
+        </div>
+
+        <div class="vedhi-body">
+            <div class="vedhi-message">
+                Hi, I'm <strong>Vedhi</strong> 👋 Anosha's assistant.
+            </div>
+            <div class="vedhi-message">
+                {{ 'She is currently available.' if status.available else 'She is currently away, but will reply soon.' }}
+            </div>
+            <div class="vedhi-message">
+                Right now she's <strong>{{ status.activity }}</strong>, based in <strong>{{ status.location }}</strong>.
+            </div>
+            <div class="vedhi-message">
+                📧 {{ status.email }}<br>
+                📞 {{ status.phone }}
+            </div>
+            <div class="vedhi-message">
+                Leave a message and she'll get back to you directly:
+            </div>
+
+            <form id="vedhiForm" class="vedhi-form">
+                <input type="text" id="vedhiName" placeholder="Your Name" required>
+                <input type="email" id="vedhiEmail" placeholder="Your Email" required>
+                <textarea id="vedhiMessage" rows="3" placeholder="Your Message" required></textarea>
+                <button type="submit">Send to Vedhi</button>
+            </form>
+
+            <p id="vedhiFeedback" class="vedhi-feedback"></p>
+        </div>
+
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

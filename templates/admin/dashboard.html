@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Anosha Oad</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="dashboard-body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>ANOSHA OAD</h2>
+
+        <ul>
+            <li><a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="#projectsTable"><i class="fas fa-folder"></i> Projects</a></li>
+            <li><a href="#" id="sidebarAddProject"><i class="fas fa-plus"></i> Add Project</a></li>
+            <li><a href="{{ url_for('admin_profile') }}"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="{{ url_for('admin_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="{{ url_for('admin_messages') }}"><i class="fas fa-envelope"></i> Messages {% if unread_count %}({{ unread_count }}){% endif %}</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-content">
+
+        <!-- VEDHI ADMIN GREETING -->
+        <div class="admin-vedhi-banner">
+            <div class="admin-vedhi-avatar">
+                <span class="admin-vedhi-face">◕‿◕</span>
+            </div>
+            <div class="admin-vedhi-text">
+                <strong>Hi Anosha, I'm Vedhi! 👋</strong>
+                <p>
+                    How may I help you connect with your visitors today?
+                    You have
+                    <span id="adminUnreadBadge">{{ unread_count }}</span>
+                    new message{{ 's' if unread_count != 1 else '' }} waiting.
+                </p>
+            </div>
+            <a href="{{ url_for('admin_messages') }}" class="admin-vedhi-btn">Check Messages</a>
+        </div>
+
+        <h1>Admin Dashboard</h1>
+        <p>Manage your portfolio projects and information.</p>
+
+        <!-- STATISTICS -->
+        <div class="dashboard-cards">
+            <div class="dashboard-card">
+                <i class="fas fa-project-diagram"></i>
+                <h2>{{ projects|length }}</h2>
+                <p>Total Projects</p>
+            </div>
+
+            <div class="dashboard-card">
+                <i class="fas fa-code"></i>
+                <h2>6+</h2>
+                <p>Technologies</p>
+            </div>
+
+            <div class="dashboard-card">
+                <i class="fas fa-eye"></i>
+                <h2>100+</h2>
+                <p>Visitors</p>
+            </div>
+        </div>
+
+        <!-- PROJECT MANAGEMENT -->
+        <section class="manage-projects" id="projectsTable">
+
+            <div class="section-header">
+                <h2>Projects Management</h2>
+                <button type="button" id="addProjectBtn">+ Add Project</button>
+            </div>
+
+            <!-- ADD PROJECT FORM -->
+            <form id="projectForm" method="POST" action="{{ url_for('add_project') }}" style="display:none;">
+                <input name="title" type="text" placeholder="Project Title" required>
+                <textarea name="description" placeholder="Project Description"></textarea>
+                <input name="technology" type="text" placeholder="Technology (comma separated)" required>
+                <input name="github" type="text" placeholder="Github Link" required>
+                <input name="demo" type="text" placeholder="Live Demo Link">
+
+                <button type="submit">Save Project</button>
+            </form>
+
+            <table class="project-table">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Technology</th>
+                        <th>GitHub</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="projectTableBody">
+                    {% for project in projects %}
+                    <tr>
+                        <td>{{ project.title }}</td>
+                        <td>{{ project.technology }}</td>
+                        <td>
+                            {% if project.github %}
+                            <a href="{{ project.github }}" target="_blank" rel="noopener">GitHub</a>
+                            {% else %}
+                            &mdash;
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="editBtn" href="{{ url_for('edit_project', project_id=project.id) }}">Edit</a>
+                            <form action="{{ url_for('delete_project', project_id=project.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete this project?');">
+                                <button type="submit" class="deleteBtn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align:center; color:#666;">No projects yet. Click "+ Add Project" to create one.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

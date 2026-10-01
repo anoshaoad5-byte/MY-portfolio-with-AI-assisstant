@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Anosha Oad</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="dashboard-body">
+
+    <aside class="sidebar">
+        <h2>ANOSHA OAD</h2>
+        <ul>
+            <li><a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="{{ url_for('admin_dashboard') }}#projectsTable"><i class="fas fa-folder"></i> Projects</a></li>
+            <li><a href="{{ url_for('admin_profile') }}"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="{{ url_for('admin_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="dashboard-content">
+        <div class="profile-page">
+            <h1>Admin Profile</h1>
+            <p>{{ settings.username }} &mdash; Portfolio Administrator</p>
+
+            {% if profile_updated %}
+            <p class="form-success">Profile info updated successfully.</p>
+            {% endif %}
+
+            <!-- SOCIAL LINKS & CONTACT INFO -->
+            <form method="POST" action="{{ url_for('update_profile') }}">
+                <label>GitHub URL</label>
+                <input type="text" name="github" placeholder="https://github.com/yourusername" value="{{ settings.github }}">
+
+                <label>LinkedIn URL</label>
+                <input type="text" name="linkedin" placeholder="https://linkedin.com/in/yourusername" value="{{ settings.linkedin }}">
+
+                <label>Instagram URL</label>
+                <input type="text" name="instagram" placeholder="https://instagram.com/yourusername" value="{{ settings.instagram }}">
+
+                <label>Phone Number</label>
+                <input type="text" name="phone" placeholder="+92 3XX XXXXXXX" value="{{ settings.phone }}">
+
+                <button type="submit" class="btn">Save Info</button>
+            </form>
+        </div>
+
+        <div class="profile-page">
+            <h1>Change Password</h1>
+
+            {% if password_error %}
+            <p class="form-error">{{ password_error }}</p>
+            {% endif %}
+            {% if password_success %}
+            <p class="form-success">{{ password_success }}</p>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('change_password') }}">
+                <label>Current Password</label>
+                <input type="password" name="old_password" placeholder="Current password" required>
+
+                <label>New Password</label>
+                <input type="password" name="new_password" placeholder="New password" required>
+
+                <button type="submit" class="btn">Update Password</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

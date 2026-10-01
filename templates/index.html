@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anosha Oad | Full Stack Developer</title>
+
+    <!-- CSS -->
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+ 
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="logo">
+    
+        <a href="{{ url_for('home') }}">ANOSHA OAD</a>
+    </div>
+
+    <nav>
+
+        <ul class="nav-links" id="navLinks">
+
+             
+            <li><a class="active" href="{{ url_for('home') }}">Home</a></li>
+
+            <li><a href="{{ url_for('about') }}">About</a></li>
+
+            <li><a href="{{ url_for('projects') }}">Projects</a></li>
+
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="hero-left">
+
+<h4>Hello, I'm</h4>
+
+<h1>ANOSHA OAD</h1>
+
+<h2>FULL STACK DEVELOPER</h2>
+
+<p>
+
+I am a Computer Science student passionate about designing and developing modern web applications using HTML, CSS, JavaScript, Python, and Flask. I enjoy creating professional, responsive, and user-friendly websites.
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="{{ url_for('static', filename='cv/Anosha_Oad_CV.pdf') }}" class="btn" download>
+
+Download CV
+
+</a>
+
+<a href="{{ url_for('projects') }}" class="btn btn2">
+
+View Projects
+
+</a>
+
+</div>
+
+<div class="social-icons">
+
+<a href="{{ site.github or '#' }}" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+
+<a href="{{ site.linkedin or '#' }}" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+
+<a href="{{ site.instagram or '#' }}" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+
+<a href="mailto:anoshaoad5@gmail.com"><i class="fas fa-envelope"></i></a>
+
+</div>
+
+</div>
+
+<div class="hero-right">
+<img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Anosha Oad">
+
+</div>
+
+</section>
+
+
+<!-- JavaScript -->
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

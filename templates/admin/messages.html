@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages | Anosha Oad</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="dashboard-body">
+
+    <aside class="sidebar">
+        <h2>ANOSHA OAD</h2>
+        <ul>
+            <li><a href="{{ url_for('admin_dashboard') }}"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="{{ url_for('admin_messages') }}"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li><a href="{{ url_for('admin_profile') }}"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="{{ url_for('admin_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <main class="dashboard-content">
+        <h1>Messages</h1>
+        <p>Visitor messages from the contact form and the Vedhi widget.</p>
+
+        <section class="manage-projects">
+            <table class="project-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Source</th>
+                        <th>Received</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in messages %}
+                    <tr>
+                        <td>{{ m.name }}</td>
+                        <td><a href="mailto:{{ m.email }}">{{ m.email }}</a></td>
+                        <td>{{ m.subject or '—' }}</td>
+                        <td>{{ m.message }}</td>
+                        <td>{{ 'Contact Form' if m.source == 'contact_form' else 'Vedhi Widget' }}</td>
+                        <td>{{ m.created_at }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('delete_message', message_id=m.id) }}"
+                                  style="display:inline;" onsubmit="return confirm('Delete this message?');">
+                                <button type="submit" class="deleteBtn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="7">No messages yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

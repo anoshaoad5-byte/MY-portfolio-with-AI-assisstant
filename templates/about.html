@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Anosha Oad</title>
+#flak serve static folder for static router url_for
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+#Font Awesome icon library from a CDN (Content Delivery Network).
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+#It downloads the Poppins font from Google Fonts.
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="logo">
+        <a href="{{ url_for('home') }}">ANOSHA OAD</a>
+    </div>
+    <nav>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a class="active" href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('projects') }}">Projects</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ================= PAGE TITLE ================= -->
+<section class="page-title">
+    <h1>About Me</h1>
+    <p>Get to know my background, education and technical skills.</p>
+</section>
+
+<!-- ================= ABOUT SECTION ================= -->
+<section class="about-section">
+    <div class="about-image">
+        <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Anosha Oad">
+    </div>
+
+    <div class="about-content">
+        <h2>Hello, I'm Anosha Oad</h2>
+
+        <p>
+            I am a Computer Science student currently pursuing my
+            BS Computer Science degree at SZABIST Hyderabad.
+            I am passionate about web development, software development,
+            and creating modern technology solutions.
+        </p>
+
+        <p>
+            I specialize in frontend and backend development using
+            HTML, CSS, JavaScript, Python, Flask, and SQL.
+            I enjoy building responsive websites and practical
+            software projects that solve real-world problems.
+        </p>
+
+        <a href="{{ url_for('static', filename='cv/Anosha_Oad_CV.pdf') }}" download class="btn">
+            Download CV
+        </a>
+    </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section class="education">
+    <h2>Education</h2>
+
+    <div class="timeline">
+        <div class="timeline-box">
+            <i class="fas fa-graduation-cap"></i>
+            <h3>BS Computer Science</h3>
+            <h4>SZABIST Hyderabad</h4>
+            <p>
+                Currently studying BSCS and developing skills
+                in software development, programming and web technologies.
+            </p>
+        </div>
+
+        <div class="timeline-box">
+            <i class="fas fa-code"></i>
+            <h3>Full Stack Development</h3>
+            <h4>Web Development Skills</h4>
+            <p>
+                Experience with frontend technologies and backend
+                development using Python Flask and databases.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section class="about-skills">
+    <h2>Technical Expertise</h2>
+
+    <div class="skill-list">
+        <div><i class="fab fa-html5"></i> HTML5</div>
+        <div><i class="fab fa-css3-alt"></i> CSS3</div>
+        <div><i class="fab fa-js"></i> JavaScript</div>
+        <div><i class="fab fa-python"></i> Python</div>
+        <div><i class="fas fa-database"></i> SQL</div>
+        <div><i class="fas fa-server"></i> Flask</div>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <p></p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
